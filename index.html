@@ -3,26 +3,21 @@
 
 <head>
 	<style>
-
   .bar{
     fill: steelblue;
   }
-
   .bar:hover{
     fill: brown;
   }
-
 	.axis {
 	  font: 10px sans-serif;
 	}
-
 	.axis path,
 	.axis line {
 	  fill: none;
 	  stroke: #000;
 	  shape-rendering: crispEdges;
 	}
-
 	</style>
 </head>
 
@@ -32,28 +27,20 @@
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
+var margin = {top: 20, right: 20, bottom: 100, left: 40},
     width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
-
-
+    height = 600 - margin.top - margin.bottom;
 // set the ranges
-var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
+var x = d3.scale.ordinal().rangeRoundBands([0, width], .5);
 var y = d3.scale.linear().range([height, 0]);
-
 // define the axis
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-
-
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .ticks(10);
-
-
 // add the SVG element
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -61,11 +48,8 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
-
-
 // load the data
 d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, data) {
-
     data.forEach(function(d) {
         d.name = d.name;
         d.price_usd = +d.price_usd;
@@ -74,7 +58,6 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
   // scale the range of the data
   x.domain(data.map(function(d) { return d.name; }));
   y.domain([0, d3.max(data, function(d) { return d.price_usd; })]);
-
   // add axis
   svg.append("g")
       .attr("class", "x axis")
@@ -85,7 +68,6 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
       .attr("dx", "-.8em")
       .attr("dy", "-.55em")
       .attr("transform", "rotate(-90)" );
-
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
@@ -94,9 +76,7 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
       .attr("y", 5)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
-
-
+      .text("USD");
   // Add bar chart
   svg.selectAll("bar")
       .data(data)
@@ -106,9 +86,7 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.price_usd); })
       .attr("height", function(d) { return height - y(d.price_usd); });
-
 });
-
 </script>
 
 </body>
