@@ -4,14 +4,11 @@
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl"> 
-
-<p>Today's welcome message is:</p>
-
-<h1>{{myWelcome}}</h1>
-
+	<div ng-repeat="post in myWelcome">
+		<div class='time'>{{post.name}} </div>
+		<p>price_usd :{{post.price_usd}}</p>
+	</div>
 </div>
-
-<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
 
 <script>
 var app = angular.module('myApp', []);
@@ -19,6 +16,8 @@ app.controller('myCtrl', function($scope, $http) {
   $http.get("https://api.coinmarketcap.com/v1/ticker/?limit=10")
   .then(function(response) {
       $scope.myWelcome = response.data;
+
   });
 });
 </script>
+</body>
