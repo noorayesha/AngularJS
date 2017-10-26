@@ -86,7 +86,7 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.price_usd); })
       .attr("height", function(d) { return height - y(d.price_usd); });
-});
+},300000);
 </script>
 
 </body>
