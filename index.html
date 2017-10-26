@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-
 <head>
 	<style>
   .bar{
@@ -20,11 +19,8 @@
 	}
 	</style>
 </head>
-
-<body>
-	
+<body>	
 <script src="http://d3js.org/d3.v3.min.js"></script>
-
 <script>
 // set the dimensions of the canvas
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
@@ -88,5 +84,4 @@ d3.json("https://api.coinmarketcap.com/v1/ticker/?limit=10", function(error, dat
       .attr("height", function(d) { return height - y(d.price_usd); });
 },300000);
 </script>
-
 </body>
